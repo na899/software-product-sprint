@@ -1,18 +1,65 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-  </head>
-  <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Naveena Pandiarajan</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div  id="title">
+        
+        <h1>Naveena Pandiarajan</h1> 
+        <h3>I'm a<span
+            class="txt-rotate"
+            data-period="2000"
+            data-rotate='[ " Student", " Developer.", " Foodie!", "lways curious &#128512; " ]'></span></h3>
+     </div>
+    <div class="container">
+        
+        <div class="row align-items-centers">
+            
+            <div id="intro" class="card col-md-5 align-items-center align-self-center">
+
+                <img id="profile-pic" src="assets/images/profile.jpeg" alt="That's me!"><br>
+        
+                <p>
+                    <a href="assets/resume.pdf" target="_blank"
+                      ><img src="https://img.icons8.com/windows/32/000000/resume.png" /></a>
+                    <a href="https://linkedin.com/in/na899" target="_blank"
+                      >
+                      <img src="https://img.icons8.com/windows/32/000000/linkedin.png" /></a>
+                    <a href="https://github.com/na899" target="_blank">
+                    <img src="https://img.icons8.com/windows/32/000000/github.png" /></a>
+                    <a href="https://medium.com/@pnaveena1999" target="_blank"> 
+                    <img src="https://img.icons8.com/windows/32/000000/medium-logo.png" /></a>
+        
+                </p>
+        
+                <p>
+                    <b>Hello World! </b> <br />
+                    I’m Naveena, 20-year-old Computer Science Engineering student at NIT-Trichy. I love exploring different fields of Computer Science and learning how it can affect our lives in different ways.  Some parts of the computer sciences that interest me the most are server-side development, cryptography and blockchain technology.
+                    <br>
+                    
+                </p>
+            </div>
+            <br>
+            <div id="terminal" class="col-md-5">
+                <p><br>Welcome to My website!<br>Get to know me better! Type "help" to get started. </p>
+				<span>$</span> <input type='text' id = "choice"  autofocus>
+                <p id="output"></p>
+            </div>           
+           
+        </div>
     </div>
-  </body>
+
+    
+</body>
+<script src="script.js"></script>
 </html>
