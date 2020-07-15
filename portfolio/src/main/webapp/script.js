@@ -83,7 +83,14 @@ TxtRotate.prototype.tick = function() {
 };
 
 window.onload = function() {
-  var elements = document.getElementsByClassName('txt-rotate');
+    
+
+     getRandomQuote();
+     typeWriterEffect(); 
+};
+
+function typeWriterEffect(){
+     var elements = document.getElementsByClassName('txt-rotate');
   for (var i=0; i<elements.length; i++) {
     var toRotate = elements[i].getAttribute('data-rotate');
     var period = elements[i].getAttribute('data-period');
@@ -96,7 +103,40 @@ window.onload = function() {
   css.type = "text/css";
   css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
   document.body.appendChild(css);
-};
+}
 
+async function getRandomQuote() {
 
+  const response = await fetch('/get-random-quote');
+  const quote = await response.text();
+  document.getElementById('quote-container').innerText = quote;
+  
+}
 
+  
+function postComment() {
+ 
+	// get inputs
+	var comment = new Object();
+	comment.name = $('#name-input').val();
+	comment.comment = $('#comment-input').val();
+	
+	$.ajax({
+		url: "post-comment",
+		type: 'POST',
+		dataType: 'json',
+		data: JSON.stringify(comment),
+		contentType: 'application/json',
+		mimeType: 'application/json',
+		
+		success: function (data) {
+            $("#comments").append($('<p/>').html("<span> <b> "+comment.name+": </b></</span><span>"+comment.comment+"</span><br/>")).append($('<p/>'))	
+            
+                
+            
+        },
+		error:function(data,status,er) {
+			alert("error: "+data.comment+" status: "+status+" er:"+er);
+		}
+	});
+}
