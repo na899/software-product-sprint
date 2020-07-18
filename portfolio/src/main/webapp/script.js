@@ -84,9 +84,9 @@ TxtRotate.prototype.tick = function() {
 
 window.onload = function() {
     
-
-     getRandomQuote();
-     typeWriterEffect(); 
+    getCommentHistory();
+    getRandomQuote();
+    typeWriterEffect(); 
 };
 
 function typeWriterEffect(){
@@ -113,16 +113,16 @@ async function getRandomQuote() {
   
 }
 
-  
-function postComment() {
- 
+$('#comment-form').submit(function(e){
+    e.preventDefault();
+    
 	// get inputs
 	var comment = new Object();
 	comment.name = $('#name-input').val();
 	comment.comment = $('#comment-input').val();
-	
+	console.log(comment);
 	$.ajax({
-		url: "post-comment",
+		url: "comment",
 		type: 'POST',
 		dataType: 'json',
 		data: JSON.stringify(comment),
@@ -130,7 +130,7 @@ function postComment() {
 		mimeType: 'application/json',
 		
 		success: function (data) {
-            $("#comments").append($('<p/>').html("<span> <b> "+comment.name+": </b></</span><span>"+comment.comment+"</span><br/>")).append($('<p/>'))	
+            $("#comments-section").append($('<p class="comment">').html("<span> <b> "+data.name+" </b></</span><br><span>"+data.comment+"</span><br/>")).append($('<p/>'))	
             
                 
             
@@ -139,4 +139,25 @@ function postComment() {
 			alert("error: "+data.comment+" status: "+status+" er:"+er);
 		}
 	});
+});
+
+
+
+//get commentHistory from server
+function getCommentHistory() {
+    fetch('/comment')
+    .then(response => response.text())
+    .then(comments => displayCommentHistory(JSON.parse(comments)));
+}
+
+//display comment history
+function displayCommentHistory(comments) {
+  
+    var commentHistory = ""
+    
+    comments.forEach(comment => {
+     commentHistory+= "<p class='comment'><span> <b> "+comment.name+" </b></</span><br><span>"+comment.comment+"</span><br/>" + "<p/>";
+        
+    });
+    document.getElementById("comments-section").innerHTML = commentHistory;
 }
