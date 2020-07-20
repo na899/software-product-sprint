@@ -1,19 +1,15 @@
 
 package com.google.sps.data;
+import lombok.AllArgsConstructor;
 
-/** A comment */
+/** A comment **/
+
+@AllArgsConstructor
 public final class Comment {
-  private static int count = 0; 
-
+  
   private final long id;
   private final String name;
   private final String comment;
-
-  public Comment(String name, String comment) {
-    this.id = count++;
-    this.name = name;
-    this.comment = comment;
-  }
 
   public String getName(){
       return this.name;
@@ -23,5 +19,5 @@ public final class Comment {
   }
  public long getId(){
       return this.id;
-  }
+ }
 }

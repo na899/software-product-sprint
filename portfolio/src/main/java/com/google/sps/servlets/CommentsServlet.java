@@ -1,4 +1,3 @@
-
 package com.google.sps.servlets;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,8 +15,9 @@ import com.google.gson.Gson;
 import com.google.sps.data.Comment;
 import java.util.ArrayList;
 import java.util.List;
+import com.google.sps.Constants;
 
-/** Servlet that processes text. */
+/** Servlet that processes comment. */
 @WebServlet("/comment")
 public final class CommentsServlet extends HttpServlet {
 
@@ -37,9 +37,9 @@ public final class CommentsServlet extends HttpServlet {
     Comment c = g.fromJson(newComment, Comment.class);
 
     //create comment entity
-    Entity commentEntity = new Entity("Comment");
-    commentEntity.setProperty("name", c.getName());
-    commentEntity.setProperty("comment",c.getComment());
+    Entity commentEntity = new Entity(Constants._COMMENT);
+    commentEntity.setProperty(Constants.NAME, c.getName());
+    commentEntity.setProperty(Constants.COMMENT,c.getComment());
     
 
     //Store comment in datastore
@@ -57,7 +57,7 @@ public final class CommentsServlet extends HttpServlet {
     
 
     //get comments from datastore
-    Query query = new Query("Comment");
+    Query query = new Query(Constants._COMMENT);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
@@ -66,10 +66,10 @@ public final class CommentsServlet extends HttpServlet {
     List<Comment> commentHistory = new ArrayList<>();
     for (Entity e : results.asIterable()) {
       long id = e.getKey().getId();
-      String name = (String) e.getProperty("name");
-      String comment = (String) e.getProperty("comment");
+      String name = (String) e.getProperty(Constants.NAME);
+      String comment = (String) e.getProperty(Constants.COMMENT);
 
-      Comment c = new Comment(name, comment);
+      Comment c = new Comment(id,name, comment);
       commentHistory.add(c);
     }
 
