@@ -65,8 +65,8 @@
          <section class="even  align-items-centers" id="two">
             <h1>Terminal</h1>
             <div id="terminal" >
-               Welcome to My website! Get to know me better! Type "help" to get started. <br>
-               <span>$</span> <input type='text' id = "choice"  >
+               Welcome to My website! Get to know me better! Type "help" to get started. <br><br>
+               <span>$</span> <input type='text' id = "choice" placeholder="Type here to get Started!">
                <p id="output"></p>
             </div>
          </section>
@@ -78,13 +78,13 @@
                      <div class=" row form-group">
                         <label class="control-label col-sm-2" for="name-input">Name : </label>
                         <div class="col-sm-10">
-                           <input type="text" id="name-input" class="form-control" name="name-input" placeholder="Name" required/>
+                           <input type="text" id="name-input" class="form-control" name="name-input" placeholder="Name" oninput="validate(this)" required/>
                         </div>
                      </div>
                      <div class=" row form-group">
                         <label class="control-label col-sm-2" for="name-input">Comments : </label>         
                         <div class="col-sm-10">
-                           <textarea name="comment-input" id="comment-input"  class="form-control" placeholder="Your Comments" required></textarea>
+                           <textarea name="comment-input" id="comment-input"  class="form-control" placeholder="Your Comments" oninput="validate(this)" required></textarea>
                         </div>
                      </div>
                      <button class="btn btn-success" type="submit" >Comment!</button>

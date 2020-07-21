@@ -117,9 +117,12 @@ $('#comment-form').submit(function(e){
     e.preventDefault();
     
 	// get inputs
+    var nameInput = document.getElementById("name-input");
+    var commentInput = document.getElementById("comment-input");
+
 	var comment = new Object();
-	comment.name = $('#name-input').val();
-	comment.comment = $('#comment-input').val();
+	comment.name = nameInput.value;
+	comment.comment = commentInput.value;
 	console.log(comment);
 	$.ajax({
 		url: "comment",
@@ -139,6 +142,9 @@ $('#comment-form').submit(function(e){
 			alert("error: "+data.comment+" status: "+status+" er:"+er);
 		}
 	});
+
+    nameInput.value='';
+    commentInput.value='';
 });
 
 
@@ -160,4 +166,11 @@ function displayCommentHistory(comments) {
         
     });
     document.getElementById("comments-section").innerHTML = commentHistory;
+}
+
+
+//validation for the case of empty spaces as input
+function validate(input){
+  if(/^\s/.test(input.value))
+    input.value = '';
 }
