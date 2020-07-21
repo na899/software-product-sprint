@@ -1,6 +1,8 @@
 package com.google.sps.servlets;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.io.InputStreamReader;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +22,7 @@ import com.google.sps.Constants;
 /** Servlet that processes comment. */
 @WebServlet("/comment")
 public final class CommentsServlet extends HttpServlet {
+  private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -29,7 +32,7 @@ public final class CommentsServlet extends HttpServlet {
 		String newComment = "";
 		if(br != null){
 			newComment = br.readLine();
-			System.out.println(newComment);
+            LOGGER.info(newComment);
 		}
 
     //convert to object
@@ -37,8 +40,8 @@ public final class CommentsServlet extends HttpServlet {
     Comment c = g.fromJson(newComment, Comment.class);
 
     //create comment entity
-    Entity commentEntity = new Entity(Constants._COMMENT);
-    commentEntity.setProperty(Constants.NAME, c.getName());
+    Entity commentEntity = new Entity(Constants.COMMENT_ENTITY);
+    commentEntity.setProperty(Constants.NAME_OF_COMMENTOR, c.getName());
     commentEntity.setProperty(Constants.COMMENT,c.getComment());
     
 
@@ -57,7 +60,7 @@ public final class CommentsServlet extends HttpServlet {
     
 
     //get comments from datastore
-    Query query = new Query(Constants._COMMENT);
+    Query query = new Query(Constants.COMMENT_ENTITY);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
@@ -66,7 +69,7 @@ public final class CommentsServlet extends HttpServlet {
     List<Comment> commentHistory = new ArrayList<>();
     for (Entity e : results.asIterable()) {
       long id = e.getKey().getId();
-      String name = (String) e.getProperty(Constants.NAME);
+      String name = (String) e.getProperty(Constants.NAME_OF_COMMENTOR);
       String comment = (String) e.getProperty(Constants.COMMENT);
 
       Comment c = new Comment(id,name, comment);
