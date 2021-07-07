@@ -83,7 +83,14 @@ TxtRotate.prototype.tick = function() {
 };
 
 window.onload = function() {
-  var elements = document.getElementsByClassName('txt-rotate');
+    
+    getCommentHistory();
+    getRandomQuote();
+    typeWriterEffect(); 
+};
+
+function typeWriterEffect(){
+     var elements = document.getElementsByClassName('txt-rotate');
   for (var i=0; i<elements.length; i++) {
     var toRotate = elements[i].getAttribute('data-rotate');
     var period = elements[i].getAttribute('data-period');
@@ -96,7 +103,74 @@ window.onload = function() {
   css.type = "text/css";
   css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
   document.body.appendChild(css);
-};
+}
+
+async function getRandomQuote() {
+
+  const response = await fetch('/get-random-quote');
+  const quote = await response.text();
+  document.getElementById('quote-container').innerText = quote;
+  
+}
+
+$('#comment-form').submit(function(e){
+    e.preventDefault();
+    
+	// get inputs
+    var nameInput = document.getElementById("name-input");
+    var commentInput = document.getElementById("comment-input");
+
+	var comment = new Object();
+	comment.name = nameInput.value;
+	comment.comment = commentInput.value;
+	console.log(comment);
+	$.ajax({
+		url: "comment",
+		type: 'POST',
+		dataType: 'json',
+		data: JSON.stringify(comment),
+		contentType: 'application/json',
+		mimeType: 'application/json',
+		
+		success: function (data) {
+            $("#comments-section").append($('<p class="comment">').html("<span> <b> "+data.name+" </b></</span><br><span>"+data.comment+"</span><br/>")).append($('<p/>'))	
+            
+                
+            
+        },
+		error:function(data,status,er) {
+			alert("error: "+data.comment+" status: "+status+" er:"+er);
+		}
+	});
+
+    nameInput.value='';
+    commentInput.value='';
+});
 
 
 
+//get commentHistory from server
+function getCommentHistory() {
+    fetch('/comment')
+    .then(response => response.text())
+    .then(comments => displayCommentHistory(JSON.parse(comments)));
+}
+
+//display comment history
+function displayCommentHistory(comments) {
+  
+    var commentHistory = ""
+    
+    comments.forEach(comment => {
+     commentHistory+= "<p class='comment'><span> <b> "+comment.name+" </b></</span><br><span>"+comment.comment+"</span><br/>" + "<p/>";
+        
+    });
+    document.getElementById("comments-section").innerHTML = commentHistory;
+}
+
+
+//validation for the case of empty spaces as input
+function validate(input){
+  if(/^\s/.test(input.value))
+    input.value = '';
+}

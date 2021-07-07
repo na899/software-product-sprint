@@ -1,53 +1,138 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Muli:ital,wght@1,800;1,900&display=swap');
 
 
+
 html,
 body {
-    height: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin:0.5%;
+}
+
+
+
+section {
+    
+  position: relative;
+  text-align: center;
+  
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  scroll-snap-align: start;
+  overflow-y: auto;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 body {
-    background-image: url('assets/images/bg.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: 100% 100%;
-    
-}
-.row{
-    margin-top: auto;
-    margin-bottom: auto;
-    margin:none;
-}
-
-
-.container {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-   
-}
-
-.card{
-    margin: auto;
-}
-
-
-#intro {
-
-    border-radius: 3px;
-    padding: 2em;
-    background-color: rgba(255,255,255,0.6);
-    
-    
-    /* style the text*/
     font-family: 'Nunito', sans-serif;
+    font-weight: normal;
+    font-size: 100%;
+    position: relative;
+  }
+  
+  nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+  }
+  
+  nav ul {
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    padding: 1rem 0;
+  }
+  
+  nav ul li{
+    display: flex;
+    justify-content: space-around;
+  }
+::scrollbar {
+  display: none;
+}
+
+
+
+.loop {
+    position: relative;
+    height: 100%;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: y mandatory;
+  }
+
+.row{
+    display: flex;
+    margin-top: 5rem;
+}
+
+
+
+.nav-link{
+  text-decoration: none;
+  color: grey
+}
+
+.odd {
+    background: white;
+    color:black
+}
+.even{
+    background: black;
+  color:white;
+    
+}
+
+#intro {    
+    /* style the text*/
+   
     color: rgb(46, 46, 53);
     font-size:2vh;
     text-align:center;
+    
+    width: 100%;
 }
+
+#title{
+    text-align:center;
+    padding-top: 1em;
+    
+}
+
+#profile-pic {    
+    
+    height: 20em;
+    width: 20em;
+    border-radius: 10em;
+}
+
+#choice{
+    outline: none;
+    border: none;
+    animation-name: blink;
+    animation-duration: 800ms;
+    animation-iteration-count: infinite;
+    color: chocolate;
+    background-color:transparent;
+    font-size:2vh;
+    width: 90%;
+}
+
+#output{
+    font-family: 'Press Start 2P', cursive;
+    color: rgb(255,255,255);
+    font-size:2vh;
+    text-align:left;
+}
+
+
 
 #terminal {
 
@@ -60,44 +145,24 @@ body {
     font-family: 'Press Start 2P', cursive;
     color: rgb(255,255,255);
     font-size:1.5vh;
+
+    justify-content: left;
     text-align:left;
-}
-
-h1,h3{
-    font-family: 'Muli', sans-serif;
-    color: rgb(255,255,255);
+    align-content: left;
     
+
 }
 
-#title{
-    text-align:center;
-    padding-top: 1em;
-    
-}
+#comments-section{
 
-#profile-pic {    
-    
-    height: 12em;
-    width: 12em;
-    border-radius: 100px;
-}
-
-#choice{
-    outline: none;
-    border: none;
-    animation-name: blink;
-    animation-duration: 800ms;
-    animation-iteration-count: infinite;
-    color: chocolate;
-    background-color:transparent;
-}
-
-#output{
-    font-family: 'Press Start 2P', cursive;
-    color: rgb(255,255,255);
-    font-size:1.5vh;
+    justify-content: left;
     text-align:left;
+    align-content: left;
 }
 
-
-
+.comment{
+    background-color: #ccc;
+    border-radius: 1px;
+    margin: 1em;
+    padding: 0.2em
+    }
